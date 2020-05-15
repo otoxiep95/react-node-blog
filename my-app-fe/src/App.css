@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+.app {
+  width: 100vw;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.app nav {
+  width: 100%;
+  height: 10vh;
+}
+
+a {
+  text-decoration: none;
+  font-size: 30px;
+  padding: 10px;
+  color: slategray;
+}
+a:visited {
+  color: slategray;
+}
+
+.weather-container {
+  width: 80vw;
+  margin-left: 10vw;
+}
+
+.container {
+  margin: 0 10vw 0 10vw;
+  width: 60vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: dodgerblue 1px solid;
+  border-radius: 20px;
+}
+
+.container h2 {
+  grid-column: 1/-1;
+}
+
+.icon-container {
+  display: grid;
+}
+.icon-container img {
+  width: 100px;
+  align-self: center;
+  justify-self: center;
+}
+
+p,
+h1,
+h2,
+h3 {
+  color: slategray;
+}
+
+span {
+  color: dodgerblue;
+}
