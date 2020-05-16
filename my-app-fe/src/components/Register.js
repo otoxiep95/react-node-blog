@@ -34,7 +34,7 @@ export default function Register() {
           type="text"
           name="first_name"
           placeholder="First Name"
-          onBlur={(e) => {
+          onChange={(e) => {
             setFirstName(e.target.value);
           }}
         ></input>
@@ -42,7 +42,7 @@ export default function Register() {
           type="text"
           name="last_name"
           placeholder="Last Name"
-          onBlur={(e) => {
+          onChange={(e) => {
             setLastName(e.target.value);
           }}
         ></input>
@@ -50,7 +50,7 @@ export default function Register() {
           type="text"
           name="email"
           placeholder="Email"
-          onBlur={(e) => {
+          onChange={(e) => {
             setEmail(e.target.value);
           }}
         ></input>
@@ -58,7 +58,7 @@ export default function Register() {
           type="password"
           name="password"
           placeholder="Password"
-          onBlur={(e) => {
+          onChange={(e) => {
             setPassword(e.target.value);
           }}
         ></input>
@@ -66,7 +66,7 @@ export default function Register() {
           type="password"
           name="confirm_password"
           placeholder="Confirm Password"
-          onBlur={(e) => {
+          onChange={(e) => {
             setConfirmPassword(e.target.value);
           }}
         ></input>

@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import UserPosts from "./components/UserPosts";
 
 import "./App.css";
+import WritePost from "./components/WritePost";
 
 export default function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -53,23 +54,33 @@ export default function App() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <a onClick={logout} href="#">
-                Logout
-              </a>
-            </li>
-            <li>
-              <Link to="/myprofile">My Profile</Link>
-            </li>
-            <li>
-              <Link to="/myposts">My Blog Posts</Link>
-            </li>
+            {!isLogged ? (
+              <div>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              </div>
+            ) : (
+              <div>
+                <li>
+                  <a onClick={logout} href="#">
+                    Logout
+                  </a>
+                </li>
+                <li>
+                  <Link to="/myprofile">My Profile</Link>
+                </li>
+                <li>
+                  <Link to="/myposts">My Blog Posts</Link>
+                </li>
+                <li>
+                  <Link to="/writepost">My Blog Posts</Link>
+                </li>
+              </div>
+            )}
           </ul>
         </nav>
         <main>
@@ -84,6 +95,7 @@ export default function App() {
             />
             <Route path="/register" component={Register} />
             <Route path="/myprofile" component={Profile} />
+            <Route path="/writepost" component={WritePost} />
           </Switch>
         </main>
       </div>

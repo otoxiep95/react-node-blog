@@ -1,2 +1,3 @@
 /my-app-fe/node_modules
+/serverside/config/mail_config.js
 /serverside/node_modules

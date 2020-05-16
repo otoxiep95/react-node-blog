@@ -20,7 +20,8 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res, next) => {
   try {
     if (req.session.user) {
-      const { title, content, user_id } = req.body;
+      const { title, content } = req.body;
+      const user_id = req.session.user.id;
       const blogpost = await BlogPost.query().insert({
         title,
         content,
