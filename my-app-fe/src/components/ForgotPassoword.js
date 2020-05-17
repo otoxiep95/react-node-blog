@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-
-  const history = useHistory();
 
   function forgotPassword() {
     fetch("http://127.0.0.1:9090/api/users/forgotpassword", {

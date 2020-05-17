@@ -12,7 +12,7 @@ export default function ForgotPassword() {
   const history = useHistory();
 
   function resetPassword() {
-    fetch("http://127.0.0.1:9090/api/users/resetpassword", {
+    fetch("http://localhost:9090/api/users/passwordreset", {
       method: "POST",
       credentials: "include",
       headers: {

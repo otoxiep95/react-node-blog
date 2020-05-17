@@ -160,13 +160,12 @@ router.post("/forgotpassword", async (req, res) => {
 });
 
 router.post("/passwordreset", async (req, res) => {
-  const { id, recoverylink, newPassword, confirmNewPassword } = req.body;
-
-  if (id && token && newPassword && confirmNewPassword) {
+  const { id, recoveryLink, newPassword, confirmNewPassword } = req.body;
+  if (id && recoveryLink && newPassword && confirmNewPassword) {
     if (newPassword == confirmNewPassword) {
       const user = await User.query().findById(id);
       if (user) {
-        if (recoverylink == user.recovery_link && user.recovery_link_status) {
+        if (recoveryLink == user.recovery_link && user.recovery_link_status) {
           bcrypt.hash(
             newPassword,
             saltRounds,
