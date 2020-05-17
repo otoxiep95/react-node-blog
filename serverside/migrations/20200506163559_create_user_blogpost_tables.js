@@ -6,6 +6,8 @@ exports.up = function (knex) {
       table.string("last_name").notNullable();
       table.string("email").notNullable();
       table.string("password").notNullable();
+      table.string("recovery_link");
+      table.boolean("recovery_link_status").defaultTo(false);
     })
     .createTable("blog_posts", (table) => {
       table.increments("id");

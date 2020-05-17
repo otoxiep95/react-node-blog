@@ -1,8 +1,10 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 const router = express.Router();
 const User = require("../../models/User.js");
-
+const mailerAuth = require("../../config/mail_config");
 var saltRounds = bcrypt.genSaltSync(10);
 
 //Create new user
@@ -110,6 +112,87 @@ router.get("/isloggedin", async (req, res) => {
     res.json({ logged: true });
   } else {
     res.status(404).send({ response: "Not logged in" });
+  }
+});
+
+//forgot password request
+router.post("/forgotpassword", async (req, res) => {
+  const { email } = req.body;
+  const user = await User.query().findOne({ email: email });
+  console.log(user);
+  if (user) {
+    let recovery_link = crypto.randomBytes(16).toString("hex");
+    console.log(user.id);
+    await User.query()
+      .patch({
+        recovery_link,
+        recovery_link_status: true,
+      })
+      .findById(user.id);
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: mailerAuth.user,
+        pass: mailerAuth.password,
+      },
+    });
+    const mailOptions = {
+      from: mailerAuth.user,
+      to: email,
+      subject: "Password reset",
+      html: `<a href="http://localhost:3000/passwordreset?id=${user.id}&link=${recovery_link}">Click here to change your password.</a>`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        res.status(502).send({
+          response: "email not sent",
+          error: error.message,
+        });
+      } else {
+        return res.status(200).send({ response: "email sent" });
+      }
+    });
+  } else {
+    return res.status(404).send({});
+  }
+});
+
+router.post("/passwordreset", async (req, res) => {
+  const { id, recoverylink, newPassword, confirmNewPassword } = req.body;
+
+  if (id && token && newPassword && confirmNewPassword) {
+    if (newPassword == confirmNewPassword) {
+      const user = await User.query().findById(id);
+      if (user) {
+        if (recoverylink == user.recovery_link && user.recovery_link_status) {
+          bcrypt.hash(
+            newPassword,
+            saltRounds,
+            async (error, hashedPassword) => {
+              if (error) {
+                return res.status(500).send({});
+              }
+
+              await user.$query().patch({
+                password: hashedPassword,
+                recovery_link_status: false,
+              });
+              res.status(200).send({ response: "Password changed" });
+            }
+          );
+        } else {
+          return res.status(403).send({});
+        }
+      } else {
+        return res.status(404).send({});
+      }
+    } else {
+      return res.status(400).send({ response: "Passwords do not match" });
+    }
+  } else {
+    return res.status(400).send({ response: "Missing fields" });
   }
 });
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -6,6 +7,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const history = useHistory();
 
   function register() {
     fetch("http://127.0.0.1:9090/api/users/register", {
@@ -24,6 +26,7 @@ export default function Register() {
       }),
     }).then((res) => {
       console.log(res);
+      history.push("/login");
     });
   }
 

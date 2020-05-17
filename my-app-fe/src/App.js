@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import BlogPosts from "./components/BlogPosts";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import UserPosts from "./components/UserPosts";
-
-import "./App.css";
+import ForgotPassword from "./components/ForgotPassoword";
+import PasswordReset from "./components/PasswordReset";
 import WritePost from "./components/WritePost";
+import "./App.css";
 
 export default function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -44,6 +51,12 @@ export default function App() {
       });
   }, [isLogged]);
 
+  const PrivateRoute = ({ component: Component }) => (
+    <Route
+      render={(props) => (isLogged ? <Component /> : <Redirect to="/login" />)}
+    />
+  );
+
   return (
     <Router>
       <div id="app">
@@ -62,6 +75,9 @@ export default function App() {
                 <li>
                   <Link to="/login">Login</Link>
                 </li>
+                <li>
+                  <Link to="/forgotpassword">ForgotPassoword</Link>
+                </li>
               </div>
             ) : (
               <div>
@@ -77,7 +93,7 @@ export default function App() {
                   <Link to="/myposts">My Blog Posts</Link>
                 </li>
                 <li>
-                  <Link to="/writepost">My Blog Posts</Link>
+                  <Link to="/writepost">Write Blog Post</Link>
                 </li>
               </div>
             )}
@@ -85,8 +101,8 @@ export default function App() {
         </nav>
         <main>
           <Switch>
-            <Route exact path="/" component={BlogPosts} />
-            <Route exact path="/myposts" component={UserPosts} />
+            <PrivateRoute exact path="/" component={BlogPosts} />
+            <PrivateRoute exact path="/myposts" component={UserPosts} />
             <Route
               path="/login"
               component={(props) => (
@@ -94,8 +110,10 @@ export default function App() {
               )}
             />
             <Route path="/register" component={Register} />
-            <Route path="/myprofile" component={Profile} />
-            <Route path="/writepost" component={WritePost} />
+            <PrivateRoute path="/myprofile" component={Profile} />
+            <PrivateRoute path="/writepost" component={WritePost} />
+            <Route path="/forgotpassword" component={ForgotPassword} />
+            <Route path="/passwordreset" component={PasswordReset} />
           </Switch>
         </main>
       </div>
