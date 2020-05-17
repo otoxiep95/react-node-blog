@@ -25,7 +25,7 @@ export default function WritePost() {
   }
 
   return (
-    <div>
+    <div className="write-post">
       <form action="">
         <input
           type="text"
@@ -35,16 +35,17 @@ export default function WritePost() {
             setPostTitle(e.target.value);
           }}
         ></input>
-        <input
+        <textarea
           type="textarea"
           name="content"
+          row="50"
           placeholder="Write your post here"
           onChange={(e) => {
             setPostContent(e.target.value);
           }}
-        ></input>
+        ></textarea>
         <button type="button" onClick={writePost}>
-          POST
+          Post
         </button>
       </form>
     </div>

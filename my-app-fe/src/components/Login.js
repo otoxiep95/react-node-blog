@@ -28,7 +28,8 @@ export default function Login({ setIsLogged }) {
   }
 
   return (
-    <div>
+    <div className="login">
+      <h2>Login</h2>
       <form action="">
         <input
           type="text"

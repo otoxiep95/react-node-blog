@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 export default function Profile() {
-  const [user, setUser] = useState(null);
-  const [userPosts, setUserPosts] = useState([]);
-
-  function getUserPosts() {
-    fetch("http://127.0.0.1:9090/api/blogposts/getuserposts", {
-      credentials: "include",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("hello");
-        console.log(data);
-        setUserPosts(data);
-      });
-  }
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     fetch("http://127.0.0.1:9090/api/users/getloggeduser", {
@@ -23,20 +12,18 @@ export default function Profile() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        getUserPosts();
-        setUser(data);
+        setFirstName(data.first_name);
+        setLastName(data.last_name);
+        setEmail(data.email);
       });
   }, []);
 
   return (
     <div className="profile-container">
-      <h1>Name:</h1>
-      <h1>Email:</h1>
-      <button type="button">Delete Profile</button>
-      <div>
-        <h2>My blog posts</h2>
-        <ul></ul>
-      </div>
+      <h1>
+        Name: {firstName} {lastName}
+      </h1>
+      <h1>Email: {email}</h1>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div>
+    <div className="forgot-password">
       <form action="">
         <input
           type="text"

@@ -1,60 +1,129 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
-.app {
+body {
   width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #e4e4e4;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
   text-align: center;
   font-family: "Roboto", sans-serif;
 }
 
-.app nav {
+#app nav {
   width: 100%;
   height: 10vh;
+  background-color: #0277bd;
+}
+#app nav ul {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin: 0;
+  height: 100%;
+  padding-top: 20px;
+}
+#app nav ul li {
+  display: inline;
 }
 
 a {
   text-decoration: none;
   font-size: 30px;
-  padding: 10px;
-  color: slategray;
+  padding: 20px;
+  color: white;
 }
 a:visited {
-  color: slategray;
+  color: white;
 }
 
-.weather-container {
-  width: 80vw;
-  margin-left: 10vw;
-}
-
-.container {
-  margin: 0 10vw 0 10vw;
-  width: 60vw;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: dodgerblue 1px solid;
-  border-radius: 20px;
-}
-
-.container h2 {
-  grid-column: 1/-1;
-}
-
-.icon-container {
+main {
+  height: 90vh;
   display: grid;
 }
-.icon-container img {
-  width: 100px;
+
+main .login,
+main .register,
+main .forgot-password {
   align-self: center;
+  justify-self: center;
+  width: 40%;
+  height: 30%;
+  padding-bottom: 5%;
+}
+
+.login h2,
+.register h2 {
+  color: #0277bd;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin: 5px;
+  border: none;
+  border-radius: 0.4rem;
+}
+
+button {
+  width: 30%;
+  height: 17%;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: #58a5f0;
+  color: white;
+  font-size: 20px;
+  padding: 3px;
+}
+
+.blog-posts,
+.user-posts {
+  width: 85%;
+  height: auto;
   justify-self: center;
 }
 
-p,
-h1,
-h2,
-h3 {
-  color: slategray;
+.blog-posts h1,
+.user-posts h1 {
+  color: #58a5f0;
+}
+.posts-list {
+  display: grid;
+  row-gap: 10px;
 }
 
-span {
-  color: dodgerblue;
+.blog-post,
+.user-post {
+  background-color: white;
+  width: 90%;
+  justify-self: center;
+  display: grid;
+  height: auto;
+  border-radius: 0.4rem;
+}
+
+.blog-post h3,
+.blog-post p,
+.user-post h3,
+.user-post p {
+  padding-left: 30px;
+  justify-self: start;
+}
+
+.write-post {
+  width: 80%;
+  height: 80%;
+  display: grid;
+  justify-self: center;
+  align-self: center;
+}
+textarea {
+  height: 70%;
 }

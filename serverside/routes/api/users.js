@@ -195,5 +195,19 @@ router.post("/passwordreset", async (req, res) => {
   }
 });
 
+//delete user
+router.delete("/delete", async (req, res) => {
+  if (req.session.user) {
+    const deleteUser = await User.query().deleteById(req.session.user.id);
+    if (deleteUser) {
+      req.status(200).send({ response: "deleted user succcess" });
+    } else {
+      req.status(404).send({ response: "couldnt delele user" });
+    }
+  } else {
+    res.status(403).send({ response: "Not logged in" });
+  }
+});
+
 // Export to api.js
 module.exports = router;

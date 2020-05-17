@@ -53,15 +53,15 @@ export default function App() {
 
   const PrivateRoute = ({ component: Component }) => (
     <Route
-      render={(props) => (isLogged ? <Component /> : <Redirect to="/login" />)}
+      render={(props) =>
+        isLogged ? <Component {...props} /> : <Redirect to="/login" />
+      }
     />
   );
 
   return (
     <Router>
       <div id="app">
-        {isLogged ? <h1>Hello User</h1> : <h1>Please Login</h1>}
-
         <nav>
           <ul>
             <li>
@@ -76,7 +76,7 @@ export default function App() {
                   <Link to="/login">Login</Link>
                 </li>
                 <li>
-                  <Link to="/forgotpassword">ForgotPassoword</Link>
+                  <Link to="/forgotpassword">Forgot Passoword</Link>
                 </li>
               </div>
             ) : (
@@ -101,8 +101,8 @@ export default function App() {
         </nav>
         <main>
           <Switch>
-            <PrivateRoute exact path="/" component={BlogPosts} />
-            <PrivateRoute exact path="/myposts" component={UserPosts} />
+            <Route exact path="/" component={BlogPosts} />
+            <PrivateRoute path="/myposts" component={UserPosts} />
             <Route
               path="/login"
               component={(props) => (

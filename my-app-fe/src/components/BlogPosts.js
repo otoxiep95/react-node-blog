@@ -12,20 +12,18 @@ export default function BlogPosts() {
   }, []);
 
   return (
-    <div>
+    <div className="blog-posts">
       <h1>Blog Posts</h1>
-      <div>
-        <ul>
-          {posts.map((item) => (
-            <div className="main-blog-post">
-              <h3>{item.title}</h3>
-              <p>{item.content}</p>
-              <p>
-                By: {item.user.first_name} {item.user.last_name}
-              </p>
-            </div>
-          ))}
-        </ul>
+      <div className="posts-list">
+        {posts.map((item) => (
+          <div className="blog-post">
+            <h3>{item.title}</h3>
+            <p>{item.content}</p>
+            <p>
+              By: {item.user.first_name} {item.user.last_name}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

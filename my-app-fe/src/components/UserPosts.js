@@ -16,20 +16,18 @@ export default function UserPosts() {
   }, []);
 
   return (
-    <div>
+    <div className="user-posts">
       <h1>My Posts</h1>
-      <div>
-        <ul>
-          {userPosts.map((item) => (
-            <div className="user-blog-post">
-              <h3>{item.title}</h3>
-              <p>{item.content}</p>
-              <p>
-                By: {item.user.first_name} {item.user.last_name}
-              </p>
-            </div>
-          ))}
-        </ul>
+      <div className="posts-list">
+        {userPosts.map((item) => (
+          <div className="user-post">
+            <h3>{item.title}</h3>
+            <p>{item.content}</p>
+            <p>
+              By: {item.user.first_name} {item.user.last_name}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
